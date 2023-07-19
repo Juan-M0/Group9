@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyTrack - Student Records</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #343a40;
+        }
+        .container {
+            max-width: 800px;
+            background-color: #fff;
+            margin-top: 40px;
+            padding: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="index.html">StudyTrack</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="student_records.html">Student Records</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="add_student.html">Add Student</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 class="text-center mb-4">Student Records</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Student Number</th>
+                    <th>Name</th>
+                    <th>English</th>
+                    <th>Math</th>
+                    <th>Science</th>
+                    <th>Spanish</th>
+                    <th>PE</th>
+                    <th>History</th>
+                </tr>
+            </thead>
+            <tbody id="studentTableBody"></tbody>
+        </table>
+        <div class="text-center">
+            <button id="clearStudentsBtn" class="btn btn-danger">Clear Students</button>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script>
+        function displayStudentRecords() {
+            const tableBody = document.getElementById("studentTableBody");
+            const studentData = JSON.parse(localStorage.getItem("studentData")) || [];
+
+            tableBody.innerHTML = ""; 
+            studentData.forEach(student => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${student.rollno}</td>
+                    <td>${student.name}</td>
+                    <td>${student.english}</td>
+                    <td>${student.math}</td>
+                    <td>${student.science}</td>
+                    <td>${student.spanish}</td>
+                    <td>${student.pe}</td>
+                    <td>${student.history}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function clearStudentRecords() {
+            localStorage.removeItem("studentData");
+            displayStudentRecords(); 
+        }
+
+        const clearStudentsBtn = document.getElementById("clearStudentsBtn");
+        clearStudentsBtn.addEventListener("click", clearStudentRecords);
+
+        displayStudentRecords();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"></script>
+</body>
+</html>
