@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyTrack - Add Student</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #343a40;
+        }
+        .container {
+            max-width: 500px;
+            background-color: #fff;
+            margin-top: 40px;
+            padding: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="index.html">StudyTrack</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="student_records.html">Student Records</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Log Out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 class="text-center mb-4">Add Class</h1>
+        <form id="addStudentForm">
+            <div class="form-group">
+                <label for="name">Class</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter Name" required>
+            </div>
+            <div class="form-group">
+                <label for="student_name">Student Name</label>
+                <input type="text" class="form-control" id="student_name" placeholder="Enter Name" required>
+            </div>
+            <div class="form-group">
+                <label for="english">Test 1</label>
+                <select class="form-control" id="english" required>
+                    <option value="">Select Test 1 Grade</option>
+                    <script>
+                        for (let i = 0; i <= 100; i++) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                    </script>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="math">Test 2</label>
+                <select class="form-control" id="math" required>
+                    <option value="">Select Test 2 Grade</option>
+                    <script>
+                        for (let i = 0; i <= 100; i++) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                    </script>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="science">Test 3</label>
+                <select class="form-control" id="science" required>
+                    <option value="">Select Test 3 Grade</option>
+                    <script>
+                        for (let i = 0; i <= 100; i++) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                    </script>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="spanish">Homework 1</label>
+                <select class="form-control" id="spanish" required>
+                    <option value="">Select Homework 1 Grade</option>
+                    <script>
+                        for (let i = 0; i <= 100; i++) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                    </script>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pe">Homework 2</label>
+                <select class="form-control" id="pe" required>
+                    <option value="">Select Homework 2 Grade</option>
+                    <script>
+                        for (let i = 0; i <= 100; i++) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                    </script>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="history">Final Exam</label>
+                <select class="form-control" id="history" required>
+                    <option value="">Select Final Exam Grade</option>
+                    <script>
+                        for (let i = 0; i <= 100; i++) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                    </script>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Student</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"></script>
+    <script>
+        const addStudentForm = document.getElementById("addStudentForm");
+
+        addStudentForm.addEventListener("submit", function (event) {
+            event.preventDefault(); 
+
+            
+            const name = document.getElementById("name").value;
+            const student_name = document.getElementById("student_name").value;
+            const english = document.getElementById("english").value;
+            const math = document.getElementById("math").value;
+            const science = document.getElementById("science").value;
+            const spanish = document.getElementById("spanish").value;
+            const pe = document.getElementById("pe").value;
+            const history = document.getElementById("history").value;
+
+            const student = {
+                student_name,
+                name,
+                english,
+                math,
+                science,
+                spanish,
+                pe,
+                history
+            };
+
+            const existingData = JSON.parse(localStorage.getItem("studentData")) || [];
+
+            existingData.push(student);
+
+            localStorage.setItem("studentData", JSON.stringify(existingData));
+
+            addStudentForm.reset();
+
+            window.location.href = "student_records.html";
+        });
+    </script>
+</body>
+</html>
